@@ -103,6 +103,21 @@ def calculate_surplus_data(sales_row):
     
     return surplus_data
 
+def get_last_5_entries_sales():
+    """
+    Collects collumns of data from the sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales") #Access sales worksheet from Google gspread
+    # column = sales.col_values() #Get the values of the 3rd column
+    # print(column)
+
+    columns = []
+    for ind in range(1, 7): #Columns in sales worksheet start at 1. range(start, stop)
+        column = sales.col_values(ind)
+        columns.append(column[-5:]) #The ":" in the slice operator tells python its a slice and not an index
+    pprint(columns)
 
 def main():
     """
@@ -116,4 +131,6 @@ def main():
     print(new_surplus_data)
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+#main()
+
+get_last_5_entries_sales()
